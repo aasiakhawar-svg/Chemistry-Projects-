@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ChemQuest Project Board</title>
+<style>
+:root{--bg:#FFF8E7;--sf:#FFFFFF;--tx:#1b1b1f;--mu:#4a4a52;--bd:#e4dcc6;--ink:#1b1b1f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15161a;--sf:#1f2127;--tx:#f2f2f5;--mu:#b8bac4;--bd:#34363f;--ink:#f2f2f5}}
+:root[data-theme="dark"]{--bg:#15161a;--sf:#1f2127;--tx:#f2f2f5;--mu:#b8bac4;--bd:#34363f;--ink:#f2f2f5}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,Segoe UI,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 18px 40px}
+.eyebrow{font-weight:700;font-size:14px;color:var(--mu)}
+h1{font-size:clamp(30px,6vw,52px);line-height:1.08;margin:6px 0 10px}
+.lead{max-width:680px;color:var(--mu);margin:0 0 22px;font-size:17px}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.steps li{background:var(--sf);border:2px solid var(--bd);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.card{--ac:var(--a1);background:var(--sf);border:3px solid var(--bd);border-radius:20px;padding:0;text-align:left;cursor:pointer;color:var(--tx);font:inherit;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-3px);border-color:var(--ac)}
+.card[aria-pressed="true"]{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac)}
+.card:focus-visible,.tab:focus-visible,.step:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.band{background:var(--a1);padding:14px;display:flex;justify-content:center}
+.cb{padding:12px 14px 16px}
+.badge{font-size:12px;font-weight:800;color:var(--ac)}
+.cb b{display:block;font-size:18px;line-height:1.2;margin:2px 0 4px}
+.cb span{font-size:14px;color:var(--mu)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card,:root:not([data-theme="light"]) .panel{--ac:var(--a2)}}
+:root[data-theme="dark"] .card,:root[data-theme="dark"] .panel{--ac:var(--a2)}
+.panel{--ac:var(--a1);margin-top:22px;background:var(--sf);border:3px solid var(--ac);border-radius:24px;overflow:hidden}
+.ph{background:var(--a1);color:#fff;padding:20px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.ph h2{margin:0;font-size:clamp(24px,4vw,34px);line-height:1.1}
+.ph p{margin:4px 0 0;font-size:16px}
+.tabs{display:flex;gap:6px;padding:12px 14px 0;flex-wrap:wrap;border-bottom:2px solid var(--bd)}
+.tab{font:inherit;font-weight:800;background:none;border:0;border-bottom:4px solid transparent;padding:10px 14px;cursor:pointer;color:var(--mu)}
+.tab[aria-selected="true"]{color:var(--ac);border-bottom-color:var(--ac)}
+.body{padding:20px 22px 24px}
+.body h3{margin:0 0 10px;font-size:19px;color:var(--ac)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.box{background:var(--bg);border:2px solid var(--bd);border-radius:16px;padding:16px 18px}
+.box ul,.box ol{margin:0;padding-left:20px}
+.box li{margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{background:var(--bg);border:2px solid var(--ac);border-radius:99px;padding:3px 12px;font-size:14px;font-weight:700}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:2px solid var(--bd);border-radius:14px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:var(--tx);width:100%}
+.step .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--a1);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step[aria-pressed="true"]{border-color:var(--ac)}
+.step[aria-pressed="true"] .n{background:var(--ink);color:var(--bg)}
+.step[aria-pressed="true"] .t{text-decoration:line-through;opacity:.7}
+.when{display:block;font-size:12px;font-weight:800;color:var(--ac)}
+.prog{height:10px;background:var(--bd);border-radius:99px;overflow:hidden;margin:0 0 14px}
+.prog i{display:block;height:100%;background:var(--ac);width:0;transition:width .2s}
+.foot{margin-top:28px;text-align:center;font-weight:700;color:var(--mu)}
+.note{font-size:14px;color:var(--mu);margin-top:12px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="eyebrow">IGCSE Chemistry (Pearson Edexcel 4CH1) | Grade 11</div>
+<h1>ChemQuest Project Board</h1>
+<p class="lead">Pick an idea, read the concept behind it, then follow the step-by-step plan to run it as a student-led station for visiting schools.</p>
+<ol class="steps"><li>1. Choose an idea</li><li>2. Understand the concept</li><li>3. Plan the execution</li><li>4. Check the requirements</li></ol>
+<div class="grid" id="grid"></div>
+<section class="panel" id="panel" aria-live="polite"></section>
+<div class="foot">Designed by Aasia Khawar</div>
+</main>
+<script>
+var IDEAS=[
+{id:1,a1:"#0E7C86",a2:"#5ED3DC",liq:"#7B2D8E",t:"Rainbow Cabbage pH Lab",s:"Acids, alkalis and pH",
+ q:"Can a vegetable tell us if a liquid is acidic or alkaline?",
+ meta:["24 students, 6 teams","1 day","Safety: low"],
+ concept:["Red cabbage contains anthocyanin pigments that change colour with the acidity of a liquid.","Acids turn the indicator red or pink, neutral liquids stay purple, and alkalis turn it blue, green or yellow.","Links to the pH scale, universal indicator and neutralisation."],
+ visitors:"Visitors predict, test mystery liquids, then place each on the giant pH scale.",
+ steps:[["Day 1","Make the indicator: chop cabbage, steep in hot water, cool and strain."],["Day 1","Build a colour chart using known solutions (vinegar, water, baking soda solution)."],["Day 2","Prepare six mystery liquids in numbered cups, with an answer key."],["Day 3","Rehearse the 3-minute explanation: what is an acid, what is an alkali."],["Show day","Visitors predict, add 5 mL indicator, compare to the chart, and pin results on the pH scale."],["Show day","Close with a challenge: sort 8 kitchen items from most acidic to most alkaline."]],
+ needs:["Red cabbage and hot water","Clear cups, droppers, strainer","Lemon juice, vinegar, baking soda, soapy water, still water","pH colour chart poster","Goggles and aprons"]},
+{id:2,a1:"#C2410C",a2:"#FF9B6B",liq:"#B87333",t:"Electroplating Studio",s:"Electrolysis, reactivity",
+ q:"How can electricity coat a key in copper?",
+ meta:["20 students, 5 teams","2 days","Safety: medium"],
+ concept:["During electrolysis, copper ions in the solution gain electrons at the negative electrode and form a layer of copper metal.","Copper from the positive electrode dissolves to replace the ions used.","Links to electrolysis, ions, electrodes and half equations."],
+ visitors:"Visitors watch the plating happen and compare a plated and an unplated key.",
+ steps:[["Day 1","Teacher prepares dilute copper sulfate solution. Students do not handle stock chemicals."],["Day 1","Clean keys or coins with sandpaper and rinse so copper can stick."],["Day 2","Trial runs: test low voltage and different times; record which plates best."],["Day 3","Write the half equations and a safety sign for the station."],["Show day","Students run the cell; visitors observe from the front, with no contact with the solution."],["Show day","Display before and after samples with a timer."]]
+ ,needs:["Low voltage DC supply or 9V battery","Dilute copper sulfate (teacher handled)","Copper strip and crocodile clips","Keys or coins to plate","Goggles, gloves and a spill kit"]},
+{id:3,a1:"#B4233C",a2:"#FF8FA3",liq:"#E8556D",t:"Fizz Rocket Race",s:"Rates of reaction",
+ q:"What makes a reaction go faster?",
+ meta:["24 students, 6 teams","1 day","Safety: low"],
+ concept:["Reactions speed up when particles collide more often and with more energy.","Warmer water, smaller pieces and higher concentration all increase the rate.","Links to collision theory, temperature, surface area and concentration."],
+ visitors:"Visitors bet on the fastest tablet, then time the race.",
+ steps:[["Day 1","Choose the variables: temperature, whole versus crushed, volume of water."],["Day 1","Practise timing with stopwatches and a fair test (same water volume each time)."],["Day 2","Draw the results board with axes ready for live plotting."],["Day 3","Rehearse the particle explanation using a simple diagram."],["Show day","Visitors predict, race three tablets at once, and plot times on the board."],["Show day","Reveal the winner and explain it with collision theory."]],
+ needs:["Effervescent tablets","Measuring cylinders, stopwatches","Cold, room and warm water","Mortar or bag to crush tablets","Graph paper and markers"]},
+{id:4,a1:"#5B3FB5",a2:"#B9A6FF",liq:"#F2A71B",t:"Vitamin C Detective",s:"Quantitative analysis, redox",
+ q:"Which juice packs the most vitamin C?",
+ meta:["20 students, 5 teams","2 days","Safety: medium"],
+ concept:["Vitamin C reacts with iodine, so the blue-black starch colour only stays once the vitamin C has been used up.","The more drops of iodine solution needed before the colour stays, the more vitamin C the juice contains.","Links to redox, titration style method, fair testing and accuracy."],
+ visitors:"Visitors help count drops and rank the juices from least to most vitamin C.",
+ steps:[["Day 1","Teacher prepares dilute iodine solution and starch solution."],["Day 1","Choose pale juices (or dilute dark ones) so the colour change is easy to see."],["Day 2","Trial: measure a fixed volume of juice, add starch, then add iodine drop by drop and count."],["Day 3","Prepare the results table and a ranking bar chart."],["Show day","Visitors predict the winner, test juices and rank them."],["Show day","Discuss accuracy: why repeats and a fair test matter."]],
+ needs:["Fruit juices (orange, lemon, apple)","Dilute iodine and starch (teacher prepared)","Droppers, test tubes, measuring syringes","Water for dilution","Goggles and aprons"]},
+{id:5,a1:"#1E7A3C",a2:"#7BE29B",liq:"#2FA855",t:"Hot Pack, Cold Pack",s:"Energetics",
+ q:"Can we design a hand warmer and an ice pack?",
+ meta:["24 students, 6 teams","1 to 2 days","Safety: low"],
+ concept:["Exothermic reactions release heat to the surroundings, so the temperature rises.","Endothermic reactions take in heat, so the temperature falls.","Links to energy profile diagrams, bond making and breaking."],
+ visitors:"Visitors feel and measure the temperature change, then label each reaction.",
+ steps:[["Day 1","Test citric acid with baking soda in water: the temperature drops (endothermic)."],["Day 1","Test steel wool soaked in vinegar for a small temperature rise; trial first, the rise is modest."],["Day 2","Record starting and final temperatures in a table; repeat for reliability."],["Day 3","Draw energy profile diagrams for both types."],["Show day","Visitors read thermometers, then sort reaction cards into hot or cold."],["Show day","Challenge: which team designs the biggest temperature change?"]],
+ needs:["Polystyrene cups, thermometers","Citric acid and baking soda","Steel wool and vinegar","Zip bags and timer","Goggles and data sheet"]}
+];
+var state={i:null,tab:"concept",done:{}};
+function flask(c,l,w){return '<svg width="'+w+'" height="'+Math.round(w*1.17)+'" viewBox="0 0 72 84" role="img" aria-label="Flask illustration"><path d="M26 6h20v22l18 40c3 7-1 12-8 12H16c-7 0-11-5-8-12l18-40z" fill="#fff"/><path d="M19 56h34l10 22c2 4 0 6-4 6H13c-4 0-6-2-4-6z" fill="'+l+'"/><circle cx="30" cy="48" r="4" fill="'+l+'"/><circle cx="42" cy="38" r="3" fill="'+l+'"/><rect x="22" y="2" width="28" height="8" rx="3" fill="#1b1b1f"/></svg>'}
+function li(a){return a.map(function(x){return "<li>"+x+"</li>"}).join("")}
+function renderGrid(){
+ document.getElementById("grid").innerHTML=IDEAS.map(function(d,k){
+  return '<button class="card" style="--a1:'+d.a1+';--a2:'+d.a2+'" aria-pressed="'+(state.i===k)+'" data-k="'+k+'"><div class="band">'+flask(d.a1,d.liq,64)+'</div><div class="cb"><span class="badge">IDEA '+d.id+'</span><b>'+d.t+'</b><span>'+d.s+'</span></div></button>'}).join("");
+ Array.prototype.forEach.call(document.querySelectorAll(".card"),function(b){b.onclick=function(){state.i=+b.dataset.k;state.tab="concept";renderGrid();renderPanel(true)}})}
+function renderPanel(scroll){
+ var p=document.getElementById("panel");
+ if(state.i===null){p.style.display="none";return}
+ var d=IDEAS[state.i];p.style.display="block";p.style.setProperty("--a1",d.a1);p.style.setProperty("--a2",d.a2);
+ var tabs=[["concept","2. Concept"],["execute","3. Execution"],["needs","4. Requirements"]];
+ var h='<div class="ph">'+flask(d.a1,d.liq,64)+'<div><h2>'+d.t+'</h2><p>'+d.q+'</p></div></div><div class="tabs" role="tablist">'+tabs.map(function(t){return '<button class="tab" role="tab" aria-selected="'+(state.tab===t[0])+'" data-t="'+t[0]+'">'+t[1]+'</button>'}).join("")+'</div><div class="body">';
+ if(state.tab==="concept"){h+='<div class="meta">'+d.meta.map(function(m){return '<span class="chip">'+m+'</span>'}).join("")+'<span class="chip">'+d.s+'</span></div><div class="two"><div class="box"><h3>The science</h3><ul>'+li(d.concept)+'</ul></div><div class="box"><h3>What visitors do</h3><p style="margin:0">'+d.visitors+'</p></div></div>'}
+ if(state.tab==="execute"){var done=d.steps.filter(function(s,k){return state.done[d.id+"-"+k]}).length;
+  h+='<h3>Step-by-step plan ('+done+' of '+d.steps.length+' done)</h3><div class="prog"><i style="width:'+Math.round(done/d.steps.length*100)+'%"></i></div><ul class="tl">'+d.steps.map(function(s,k){return '<li><button class="step" aria-pressed="'+!!state.done[d.id+"-"+k]+'" data-s="'+k+'"><span class="n">'+(k+1)+'</span><span><span class="when">'+s[0]+'</span><span class="t">'+s[1]+'</span></span></button></li>'}).join("")+'</ul><p class="note">Tap a step to tick it off. Each team needs a leader, a lead scientist, an explainer and a documenter.</p>'}
+ if(state.tab==="needs"){h+='<div class="two"><div class="box"><h3>You will need</h3><ul>'+li(d.needs)+'</ul></div><div class="box"><h3>Safety rules</h3><ul><li>Teacher approves a written risk assessment first</li><li>Goggles on for every team member</li><li>Strong chemicals handled by the teacher only</li><li>Backup demo ready if the experiment fails</li></ul></div></div>'}
+ h+='</div>';p.innerHTML=h;
+ Array.prototype.forEach.call(p.querySelectorAll(".tab"),function(b){b.onclick=function(){state.tab=b.dataset.t;renderPanel(false)}});
+ Array.prototype.forEach.call(p.querySelectorAll(".step"),function(b){b.onclick=function(){var key=d.id+"-"+b.dataset.s;state.done[key]=!state.done[key];renderPanel(false)}});
+ if(scroll){p.scrollIntoView({behavior:"smooth",block:"start"})}}
+renderGrid();renderPanel(false);
+</script>
+</body>
+</html>
